@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Post - SNS App</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <h1>Create New Post</h1>
+        <div class="user-info">
+          <span class="username">Posting as <strong><%= user.id %></strong></span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="/main" class="btn btn-secondary">Back to Feed</a>
+      </nav>
+    </header>
+    
+    <main class="main-content">
+      <div class="post-form-container">
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="alert alert-error">
+            <%= error %>
+          </div>
+        <% } %>
+        
+        <form action="/posts/new" method="POST" class="post-form">
+          <div class="form-group">
+            <label for="content">What's on your mind?</label>
+            <textarea 
+              id="content" 
+              name="content" 
+              rows="6" 
+              placeholder="Share your thoughts..."
+              maxlength="1000"
+              required
+              autofocus
+            ></textarea>
+            <span class="char-count">0 / 1000</span>
+          </div>
+          
+          <div class="form-actions">
+            <a href="/main" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    const textarea = document.getElementById('content');
+    const charCount = document.querySelector('.char-count');
+    
+    textarea.addEventListener('input', function() {
+      charCount.textContent = this.value.length + ' / 1000';
+    });
+  </script>
+</body>
+</html>
